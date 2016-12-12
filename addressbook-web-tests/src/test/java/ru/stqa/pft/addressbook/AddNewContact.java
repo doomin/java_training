@@ -32,7 +32,7 @@ public class AddNewContact {
   }
 
   @Test
-  public void AddNewContact() {
+  public void testAddNewContact() {
 
     gotoAddNewContact();
     fillNewContactForm(new NewContact("Kazimierz", "Przerwa", "Tetmajer", "tadziu", "Pan", "kanjiclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"));
