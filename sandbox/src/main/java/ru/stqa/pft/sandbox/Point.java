@@ -8,6 +8,7 @@ public class Point {
   //Parameters definition
   public double x;
   public double y;
+  public double result;
 
   //Constructor for Point object
   public Point(double x, double y) {
@@ -15,9 +16,13 @@ public class Point {
     this.y = y;
   }
 
+
   //Method for calculating distance from one point to another
   public double distance(Point other) {
-    return Math.sqrt((other.x - this.x) * (other.x - this.x) + (other.y - this.y) * (other.y - this.y));
-
+    result = Math.sqrt((other.x - this.x) * (other.x - this.x) + (other.y - this.y) * (other.y - this.y));
+    result *= 1000;
+    result = Math.round(result);
+    result /= 1000;
+    return result;
   }
 }
