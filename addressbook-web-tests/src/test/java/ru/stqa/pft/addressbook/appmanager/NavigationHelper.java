@@ -23,4 +23,12 @@ public class NavigationHelper extends HelperBase {
   public void returnToHomepage() {
     click(By.linkText("home page"));
   }
+
+  public void returnToHome() {
+    click(By.linkText("home"));
+  }
+
+  public void closePopUp(){
+    wd.switchTo().alert().accept();
+  }
 }
