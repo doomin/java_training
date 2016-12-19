@@ -29,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/stqa/pft/sandbox/Equation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="e#586#587#0" expanded="true" />
                 <element signature="e#604#605#0" expanded="true" />
@@ -963,7 +963,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/stqa/pft/sandbox/Equation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="e#586#587#0" expanded="true" />
             <element signature="e#604#605#0" expanded="true" />
