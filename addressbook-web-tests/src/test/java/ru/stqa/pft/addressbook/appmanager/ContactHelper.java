@@ -39,7 +39,7 @@ public class ContactHelper extends HelperBase{
   }
 
   public void deleteContact() {
-    click(By.id("6"));
+    click(By.name("selected[]"));
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
@@ -54,5 +54,27 @@ public class ContactHelper extends HelperBase{
   public void submitContactModification() {
     click(By.name("update"));
   }
+
+  public void gotoAddNewContact() {
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")
+            && isElementPresent(By.name("submit"))
+            && isElementPresent(By.name("new_group"))){
+      return;
+    }
+    click(By.linkText("add new"));
+  }
+
+
+  public void createContact(NewContact contact, boolean b) {
+    gotoAddNewContact();
+    fillNewContactForm(contact,b);
+    submitNewContact();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
 
 }
