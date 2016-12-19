@@ -2,8 +2,8 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by doomin on 13.12.16.
@@ -37,5 +37,14 @@ public class HelperBase {
     } catch (NoAlertPresentException e) {
       return false;
     }
+  }
+
+  protected boolean isElementPresent(By localizator) {
+     try{
+       wd.findElement(localizator);
+       return true;
+     } catch (NoSuchElementException ex){
+       return false;
+     }
   }
 }

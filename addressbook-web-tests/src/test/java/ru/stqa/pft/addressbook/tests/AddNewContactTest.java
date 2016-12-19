@@ -9,7 +9,7 @@ public class AddNewContactTest extends TestBase{
   public void testAddNewContact() {
 
     app.getNavigationHelper().gotoAddNewContact();
-    app.getContactHelper().fillNewContactForm(new NewContact("Kazimierz", "Przerwa", "Tetmajer", "tadziu", "Pan", "kanjiclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"));
+    app.getContactHelper().fillNewContactForm(new NewContact("test11","Zenon", "Zenon", "Zenon", "tadziu", "Pan", "kanjiclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"), true);
     app.getContactHelper().submitNewContact();
     app.getNavigationHelper().returnToHomepage();
   }
