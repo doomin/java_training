@@ -13,7 +13,7 @@ public class ContactModificationTest extends TestBase{
 
   app.getContactHelper().viewContactDetails();
   app.getContactHelper().modifyContactDetails();
-  app.getContactHelper().fillNewContactForm(new NewContact(null,"Włodzimierz", "Lato", "Tetmajer", "tadziu", "Pan", "kanjiclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"), false);
+  app.getContactHelper().fillNewContactForm(new NewContact(null,"Tomasz", "Wio", "Kulfon", "ziutek", "Pan", "auto", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"), false);
   app.getContactHelper().submitContactModification();
   }
 }
