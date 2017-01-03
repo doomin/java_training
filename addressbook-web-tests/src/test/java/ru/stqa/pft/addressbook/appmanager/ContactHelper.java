@@ -99,7 +99,7 @@ public class ContactHelper extends HelperBase{
       NewContact contact = new NewContact(null, firstname, null, lastname, null, null, null, null, null, null);
       contacts.add(contact);
         }
-
+    contacts.remove(0);
     return contacts;
   }
 
