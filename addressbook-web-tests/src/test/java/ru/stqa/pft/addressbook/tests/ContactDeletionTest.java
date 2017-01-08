@@ -20,7 +20,7 @@ public class ContactDeletionTest extends TestBase{
     List<NewContact> before = app.getContactHelper().getContactList();
     app.getContactHelper().deleteContact();
     app.getNavigationHelper().closePopUp();
-    app.getNavigationHelper().returnToHome();
+    app.getNavigationHelper().returnToHomepage();
     List<NewContact> after = app.getContactHelper().getContactList();
 
     before.remove(0);

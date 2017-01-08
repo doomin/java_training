@@ -66,7 +66,7 @@ public class ContactHelper extends HelperBase{
             && isElementPresent(By.name("new_group"))){
       return;
     }
-    click(By.linkText("add new"));
+    click(By.linkText("nowy wpis"));
   }
 
 
@@ -84,18 +84,18 @@ public class ContactHelper extends HelperBase{
     List<NewContact> contacts = new ArrayList<NewContact>();
     List<WebElement> tr_collection = wd.findElements(By.tagName("tr"));
 
-    for (WebElement trElement : tr_collection){
-      List<WebElement> cellsFirstName = trElement.findElements(By.cssSelector("td:nth-child(3)"));
-      List<WebElement> cellsLastName = trElement.findElements(By.cssSelector("td:nth-child(2)"));
-      String firstname = "";
-      String lastname = "";
+      for (WebElement trElement : tr_collection){
+        List<WebElement> cellsFirstName = trElement.findElements(By.cssSelector("td:nth-child(3)"));
+        List<WebElement> cellsLastName = trElement.findElements(By.cssSelector("td:nth-child(2)"));
+        String firstname = "";
+        String lastname = "";
 
-      for (WebElement element1 : cellsFirstName) {
-        firstname = element1.getText();
-      }
-      for (WebElement element2 : cellsLastName) {
-        lastname = element2.getText();
-      }
+        for (WebElement element1 : cellsFirstName) {
+          firstname = element1.getText();
+        }
+        for (WebElement element2 : cellsLastName) {
+          lastname = element2.getText();
+        }
       NewContact contact = new NewContact(null, firstname, null, lastname, null, null, null, null, null, null);
       contacts.add(contact);
         }

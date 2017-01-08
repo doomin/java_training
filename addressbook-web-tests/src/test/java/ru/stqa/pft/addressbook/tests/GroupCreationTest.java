@@ -16,7 +16,7 @@ public class GroupCreationTest extends TestBase{
 
     app.getNavigationHelper().goToGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData("test3", null, null);
+    GroupData group = new GroupData("test6", null, null);
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
