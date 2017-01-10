@@ -15,7 +15,7 @@ public class AddNewContactTest extends TestBase {
 
     NewContact contact = new NewContact("test1", "Karol", "K", "Karolkiewicz", "err", "Pan", "clubclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail");
     app.getContactHelper().createContact(contact, true);
-    app.getNavigationHelper().returnToHomepage();
+    app.goTo().returnToHomepage();
 
     List<NewContact> after = app.getContactHelper().getContactList();
 

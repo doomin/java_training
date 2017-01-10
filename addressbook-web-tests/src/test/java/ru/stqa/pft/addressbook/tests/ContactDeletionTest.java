@@ -15,12 +15,12 @@ public class ContactDeletionTest extends TestBase{
   public void testContactDeletion() {
     if (! app.getContactHelper().isThereAContact()){
       app.getContactHelper().createContact(new NewContact("test1","Kleofas", "Kacper", "Kazmirz", "elo", "Pan", "clubclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"), true);
-      app.getNavigationHelper().returnToHomepage();
+      app.goTo().returnToHomepage();
     }
     List<NewContact> before = app.getContactHelper().getContactList();
     app.getContactHelper().deleteContact();
-    app.getNavigationHelper().closePopUp();
-    app.getNavigationHelper().returnToHomepage();
+    app.goTo().closePopUp();
+    app.goTo().returnToHomepage();
     List<NewContact> after = app.getContactHelper().getContactList();
 
     before.remove(0);
