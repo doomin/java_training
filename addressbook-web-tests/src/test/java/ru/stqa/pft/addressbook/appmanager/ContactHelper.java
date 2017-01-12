@@ -100,11 +100,12 @@ public class ContactHelper extends HelperBase{
 
   public List<NewContact> all() {
       Contacts contacts = new Contacts();
-      List<WebElement> trCollection = wd.findElements(By.tagName("tr"));
+    List<WebElement> trCollection = wd.findElements(By.tagName("tr"));
+     // List<WebElement> tdCollection = wd.findElements(By.tagName("td"));
 
       for (WebElement trElement : trCollection) {
 
-          List<WebElement> cells = trElement.findElements(By.cssSelector("td"));
+         List<WebElement> cells = trElement.findElements(By.tagName("td"));
           String firstname = cells.get(3).getText();
           String lastname = cells.get(2).getText();
           int id = Integer.getInteger(cells.get(1).getAttribute("id"));
