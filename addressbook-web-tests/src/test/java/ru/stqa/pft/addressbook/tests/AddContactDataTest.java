@@ -1,20 +1,20 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.NewContact;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AddNewContactTest extends TestBase {
+public class AddContactDataTest extends TestBase {
 
 
 
   @Test //(enabled = false)
   public void testAddNewContact() {
     Contacts before = app.contact().all();
-    NewContact contact = new NewContact()
+    ContactData contact = new ContactData()
             .withGroup("test1")
             .withFirstName("Zennon")
             .withSecondName("F")

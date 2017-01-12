@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
-public class NewContact {
+public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String group;
     private String firstname;
@@ -10,7 +10,9 @@ public class NewContact {
     private String title;
     private String company;
     private String address;
+    private String home;
     private String mobile;
+    private String work;
     private String email;
 
   public String getFirstname() {
@@ -29,7 +31,27 @@ public class NewContact {
     return nickname;
   }
 
-  public String getTitle() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != that.id) return false;
+        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+        return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        return result;
+    }
+
+    public String getTitle() {
     return title;
   }
 
@@ -41,9 +63,17 @@ public class NewContact {
     return address;
   }
 
+  public String getHome() {
+        return home;
+    }
+
   public String getMobile() {
     return mobile;
   }
+
+  public String getWork() {
+        return work;
+    }
 
   public String getEmail() {
     return email;
@@ -57,74 +87,65 @@ public class NewContact {
         return id;
     }
 
-  public NewContact withId(int id){
+  public ContactData withId(int id){
         this.id = id;
         return this;
     }
-    public NewContact withGroup(String group){
+    public ContactData withGroup(String group){
         this.group = group;
         return this;
     }
-    public NewContact withFirstName(String firstname){
+    public ContactData withFirstName(String firstname){
         this.firstname = firstname;
         return this;
     }
-    public NewContact withSecondName(String secondname){
+    public ContactData withSecondName(String secondname){
         this.secondname = secondname;
         return this;
     }
-    public NewContact withLastName(String lastname){
+    public ContactData withLastName(String lastname){
         this.lastname = lastname;
         return this;
     }
-    public NewContact withNickName(String nickname){
+    public ContactData withNickName(String nickname){
         this.nickname = nickname;
         return this;
     }
-    public NewContact withTitle(String title){
+    public ContactData withTitle(String title){
         this.title = title;
         return this;
     }
-    public NewContact withCompany(String company){
+    public ContactData withCompany(String company){
         this.company = company;
         return this;
     }
-    public NewContact withAddress(String address){
+    public ContactData withAddress(String address){
         this.address = address;
         return this;
     }
-    public NewContact withMobile(String mobile){
+    public ContactData withHome(String home){
+        this.home = home;
+        return this;
+    }
+    public ContactData withMobile(String mobile){
         this.mobile = mobile;
         return this;
     }
-    public NewContact withEmail(String email){
+    public ContactData withWork(String work){
+        this.work = work;
+        return this;
+    }
+    public ContactData withEmail(String email){
         this.email = email;
         return this;
     }
 
   @Override
   public String toString() {
-    return "NewContact{" +
+    return "ContactData{" +
             "firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    NewContact that = (NewContact) o;
-
-    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
-    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    return result;
-  }
 }
