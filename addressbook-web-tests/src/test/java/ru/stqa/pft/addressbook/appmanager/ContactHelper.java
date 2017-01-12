@@ -8,10 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContact;
 
-import javax.xml.ws.WebEndpoint;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by doomin on 12.12.16.
@@ -26,24 +23,30 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillNewContactForm(NewContact newContact, boolean creation) {
+  public void fillNewContactForm(NewContact contact, boolean creation) {
 
-    type(By.name("firstname"),newContact.getFirstname());
-    type(By.name("middlename"),newContact.getSecondname());
-    type(By.name("lastname"),newContact.getLastname());
-    type(By.name("nickname"),newContact.getNickname());
-    type(By.name("title"),newContact.getTitle());
-    type(By.name("company"),newContact.getCompany());
-    type(By.name("address"),newContact.getAddress());
-    type(By.name("mobile"),newContact.getMobile());
-    type(By.name("email"),newContact.getEmail());
+    type(By.name("firstname"),contact.getFirstname());
+    type(By.name("middlename"),contact.getSecondname());
+    type(By.name("lastname"),contact.getLastname());
+    type(By.name("nickname"),contact.getNickname());
+    type(By.name("title"),contact.getTitle());
+    type(By.name("company"),contact.getCompany());
+    type(By.name("address"),contact.getAddress());
+    type(By.name("mobile"),contact.getMobile());
+    type(By.name("email"),contact.getEmail());
 
     if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(newContact.getGroup());
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
+    public void returnToHomepage() {
+        if (isElementPresent(By.id("maintable"))){
+            return;
+        }
+        click(By.linkText("strona główna"));
+    }
 
     public void returnToHome() {
         if (isElementPresent(By.id("maintable"))){
@@ -58,10 +61,20 @@ public class ContactHelper extends HelperBase{
     public void closePopUp(){
         wd.switchTo().alert().accept();
     }
-    public void delete(NewContact newContact) {
-        selectContactById(newContact.getId());
+
+    public void modifyContact(NewContact contact){
+        viewContactDetails();
+        modifyContactDetails();
+        fillNewContactForm(contact, false);
+        submitContactModification();
+        contactCache = null;
+        returnToHomepage();
+    }
+    public void delete(NewContact contact) {
+        selectContactById(contact.getId());
         deleteSelectedContact();
         closePopUp();
+        contactCache = null;
         returnToHome();
     }
 
@@ -91,6 +104,8 @@ public class ContactHelper extends HelperBase{
     gotoAddNewContact();
     fillNewContactForm(contact,b);
     submitNewContact();
+    contactCache = null;
+    returnToHomepage();
   }
 
     public void selectContactById(int id) {
@@ -101,8 +116,13 @@ public class ContactHelper extends HelperBase{
     return isElementPresent(By.name("selected[]"));
   }
 
+    private Contacts contactCache = null;
+
   public Contacts all() {
-      Contacts contacts = new Contacts();
+      if (contactCache != null){
+          return new Contacts(contactCache);
+      }
+      contactCache = new Contacts();
     List<WebElement> trCollection = wd.findElements(By.name("entry"));
       for (WebElement trElement : trCollection) {
          List<WebElement> cells = trElement.findElements(By.cssSelector("td"));
@@ -110,12 +130,12 @@ public class ContactHelper extends HelperBase{
           String lastname = cells.get(1).getText();
           int id = Integer.parseInt(trElement.findElement(By.tagName("input")).getAttribute("id"));
 
-          contacts.add(
+          contactCache.add(
                   new NewContact()
                           .withId(id)
                           .withFirstName(firstname)
                           .withLastName(lastname));
       }
-    return contacts;
+    return new Contacts(contactCache);
   }
 }

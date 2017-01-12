@@ -1,13 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContact;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -32,15 +28,13 @@ public class ContactDeletionTest extends TestBase{
               .withAddress("Zachodnia 12/b33-333 Krakow")
               .withMobile("484787545")
               .withEmail("hotmail@htomail.com"), true);
-      app.goTo().returnToHomepage();
-    }
+     }
   }
   @Test //(enabled = false)
   public void testContactDeletion() {
     Contacts before = app.contact().all();
     NewContact deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
-    app.goTo().returnToHomepage();
     Contacts after = app.contact().all();
     assertEquals(after.size(), before.size()-1);
     assertThat(after, equalTo(before.without(deletedContact)));
