@@ -15,6 +15,17 @@ public class ContactData {
     private String work;
     private String email;
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    private String allPhones;
+
   public String getFirstname() {
     return firstname;
   }
