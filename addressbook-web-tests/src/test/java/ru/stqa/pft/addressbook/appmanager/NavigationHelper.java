@@ -27,12 +27,6 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("strona główna"));
   }
 
-  public void returnToHome() {
-    if (isElementPresent(By.id("maintable"))){
-      return;
-    }
-    click(By.linkText("home"));
-  }
   public void closePopUp(){
     wd.switchTo().alert().accept();
   }

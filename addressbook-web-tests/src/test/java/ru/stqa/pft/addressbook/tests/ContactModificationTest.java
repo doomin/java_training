@@ -1,37 +1,64 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContact;
 
 import java.util.Comparator;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by doomin on 13.12.16.
  */
 public class ContactModificationTest extends TestBase {
 
-  @Test //(enabled = false)
-  public void testContactModification() {
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new NewContact("test11", "Kleofas", "Kacper", "Kazmirz", "elo", "Pan", "clubclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"), true);
+  @BeforeMethod
+  public void ensurePreconditions(){
+    if (app.contact().all().size() == 0){
+      app.contact().createContact(new NewContact()
+              .withGroup("test1")
+              .withFirstName("Kleofas")
+              .withSecondName("G")
+              .withLastName("Filipiak")
+              .withNickName("trr")
+              .withTitle("Pan")
+              .withCompany("comp")
+              .withAddress("Zachodnia 12/b33-333 Krakow")
+              .withMobile("484787545")
+              .withEmail("hotmail@htomail.com"), true);
       app.goTo().returnToHomepage();
     }
-    List<NewContact> before = app.getContactHelper().getContactList();
-    app.getContactHelper().viewContactDetails();
-    app.getContactHelper().modifyContactDetails();
-    NewContact contact = new NewContact(null, "Euzebiusz", "Wio", "Smolarek", "ziutek", "Pan", "auto", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail");
-    app.getContactHelper().fillNewContactForm(contact, false);
-    app.getContactHelper().submitContactModification();
-    app.goTo().returnToHomepage();
-    List<NewContact> after = app.getContactHelper().getContactList();
+  }
 
-    before.remove(0 );
-    before.add(contact);
-    Comparator<? super NewContact> byName = (c1, c2) -> c1.getLastname().compareTo(c2.getLastname());
-    before.sort(byName);
-    after.sort(byName);
-    Assert.assertEquals(before, after);
+  @Test //(enabled = false)
+  public void testContactModification() {
+    Contacts before = (Contacts) app.contact().all();
+    NewContact modifiedContact = before.iterator().next();
+    app.contact().viewContactDetails();
+    app.contact().modifyContactDetails();
+    NewContact contact = new NewContact()
+            .withFirstName("TTT")
+            .withSecondName("KKK")
+            .withLastName("ZZZ")
+            .withNickName("eew")
+            .withTitle("Pani")
+            .withCompany("aweerer")
+            .withAddress("Lesna 80\n04-555 Warszawa")
+            .withMobile("111111111")
+            .withEmail("poczta@poczta.com");
+    app.contact().fillNewContactForm(contact, false);
+    app.contact().submitContactModification();
+    app.goTo().returnToHomepage();
+
+    Contacts after = (Contacts) app.contact().all();
+    assertEquals(after.size(), before.size());
+    assertThat(after, equalTo(before. without(modifiedContact).withAdded(contact)));
+
   }
 }

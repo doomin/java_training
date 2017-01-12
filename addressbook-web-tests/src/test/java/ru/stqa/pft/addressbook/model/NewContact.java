@@ -1,31 +1,17 @@
 package ru.stqa.pft.addressbook.model;
 
 public class NewContact {
-  private String group;
-  private final String firstname;
-  private final String secondname;
-  private final String lastname;
-  private final String nickname;
-  private final String title;
-  private final String company;
-  private final String address;
-  private final String mobile;
-  private final String email;
-
-  public NewContact(String group, String firstname, String secondname, String lastname, String nickname, String title, String company, String address, String mobile, String email) {
-    this.group = group;
-    this.firstname = firstname;
-    this.secondname = secondname;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.title = title;
-    this.company = company;
-    this.address = address;
-    this.mobile = mobile;
-    this.email = email;
-  }
-
-
+    private int id = Integer.MAX_VALUE;
+    private String group;
+    private String firstname;
+    private String secondname;
+    private String lastname;
+    private String nickname;
+    private String title;
+    private String company;
+    private String address;
+    private String mobile;
+    private String email;
 
   public String getFirstname() {
     return firstname;
@@ -42,7 +28,6 @@ public class NewContact {
   public String getNickname() {
     return nickname;
   }
-
 
   public String getTitle() {
     return title;
@@ -67,6 +52,55 @@ public class NewContact {
   public String getGroup() {
     return group;
   }
+
+  public int getId() {
+        return id;
+    }
+
+  public NewContact withId(int id){
+        this.id = id;
+        return this;
+    }
+    public NewContact withGroup(String group){
+        this.group = group;
+        return this;
+    }
+    public NewContact withFirstName(String firstname){
+        this.firstname = firstname;
+        return this;
+    }
+    public NewContact withSecondName(String secondname){
+        this.secondname = secondname;
+        return this;
+    }
+    public NewContact withLastName(String lastname){
+        this.lastname = lastname;
+        return this;
+    }
+    public NewContact withNickName(String nickname){
+        this.nickname = nickname;
+        return this;
+    }
+    public NewContact withTitle(String title){
+        this.title = title;
+        return this;
+    }
+    public NewContact withCompany(String company){
+        this.company = company;
+        return this;
+    }
+    public NewContact withAddress(String address){
+        this.address = address;
+        return this;
+    }
+    public NewContact withMobile(String mobile){
+        this.mobile = mobile;
+        return this;
+    }
+    public NewContact withEmail(String email){
+        this.email = email;
+        return this;
+    }
 
   @Override
   public String toString() {

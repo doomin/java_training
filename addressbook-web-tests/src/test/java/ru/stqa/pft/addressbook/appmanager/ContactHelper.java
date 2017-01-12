@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContact;
 
+import javax.xml.ws.WebEndpoint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by doomin on 12.12.16.
@@ -42,10 +45,22 @@ public class ContactHelper extends HelperBase{
     }
   }
 
-  public void deleteContact() {
-    click(By.name("selected[]"));
+    public void returnToHome() {
+        if (isElementPresent(By.id("maintable"))){
+            return;
+        }
+        click(By.linkText("home"));
+    }
+
+  public void deleteSelectedContact() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
+
+    public void delete(NewContact newContact) {
+        selectContactById(newContact.getId());
+        deleteSelectedContact();
+        returnToHome();
+    }
 
   public void viewContactDetails() {
     click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
@@ -69,39 +84,57 @@ public class ContactHelper extends HelperBase{
     click(By.linkText("nowy wpis"));
   }
 
-
   public void createContact(NewContact contact, boolean b) {
     gotoAddNewContact();
     fillNewContactForm(contact,b);
     submitNewContact();
   }
 
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
+       }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public List<NewContact> getContactList() {
-    List<NewContact> contacts = new ArrayList<NewContact>();
-    List<WebElement> tr_collection = wd.findElements(By.tagName("tr"));
+  public List<NewContact> all() {
+      Contacts contacts = new Contacts();
+      List<WebElement> trCollection = wd.findElements(By.tagName("tr"));
 
-      for (WebElement trElement : tr_collection){
-        List<WebElement> cellsFirstName = trElement.findElements(By.cssSelector("td:nth-child(3)"));
-        List<WebElement> cellsLastName = trElement.findElements(By.cssSelector("td:nth-child(2)"));
-        String firstname = "";
-        String lastname = "";
+      for (WebElement trElement : trCollection) {
 
-        for (WebElement element1 : cellsFirstName) {
-          firstname = element1.getText();
-        }
-        for (WebElement element2 : cellsLastName) {
-          lastname = element2.getText();
-        }
-      NewContact contact = new NewContact(null, firstname, null, lastname, null, null, null, null, null, null);
-      contacts.add(contact);
-        }
-    contacts.remove(0);
-    return contacts;
+          List<WebElement> cells = trElement.findElements(By.cssSelector("td"));
+          String firstname = cells.get(3).getText();
+          String lastname = cells.get(2).getText();
+          int id = Integer.getInteger(cells.get(1).getAttribute("id"));
+
+          /*
+          List<WebElement> cellsFirstName = trElement.findElements(By.cssSelector("td:nth-child(3)"));
+          List<WebElement> cellsLastName = trElement.findElements(By.cssSelector("td:nth-child(2)"));
+          List<WebElement> cellsId = trElement.findElements(By.tagName("input"));
+          String firstname = "";
+          String lastname = "";
+          int id = 0;
+
+          for (WebElement element1 : cellsFirstName) {
+              firstname = element1.getText();
+          }
+          for (WebElement element2 : cellsLastName) {
+              lastname = element2.getText();
+          }
+          for (WebElement element3 : cellsId) {
+              id = Integer.parseInt(element3.findElement(By.tagName("input")).getAttribute("value"));
+          }
+          */
+
+          contacts.add(
+                  new NewContact()
+                          .withId(id)
+                          .withFirstName(firstname)
+                          .withLastName(lastname));
+      }
+    //contacts.remove(0);
+    return (List<NewContact>) contacts;
   }
-
-
 }
