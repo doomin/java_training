@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ContactModificationTest extends TestBase {
 
-  @Test (enabled = false)
+  @Test //(enabled = false)
   public void testContactModification() {
     if (!app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new NewContact("test11", "Kleofas", "Kacper", "Kazmirz", "elo", "Pan", "clubclub", "Wschodnia 15\n04-333 Putki", "48444888666", "kazmisztet@mail.mail"), true);
