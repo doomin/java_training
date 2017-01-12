@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,9 +23,9 @@ public class ContactDeletionTest extends TestBase{
     if (app.contact().all().size() == 0){
       app.contact().createContact(new NewContact()
               .withGroup("test1")
-              .withFirstName("Kleofas")
-              .withSecondName("G")
-              .withLastName("Filipiak")
+              .withFirstName("Grzegorz")
+              .withSecondName("V")
+              .withLastName("Markowiak")
               .withNickName("trr")
               .withTitle("Pan")
               .withCompany("comp")
@@ -36,12 +37,11 @@ public class ContactDeletionTest extends TestBase{
   }
   @Test //(enabled = false)
   public void testContactDeletion() {
-    Contacts before = (Contacts) app.contact().all();
+    Contacts before = app.contact().all();
     NewContact deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
-    app.goTo().closePopUp();
     app.goTo().returnToHomepage();
-    Contacts after = (Contacts) app.contact().all();
+    Contacts after = app.contact().all();
     assertEquals(after.size(), before.size()-1);
     assertThat(after, equalTo(before.without(deletedContact)));
   }

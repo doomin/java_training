@@ -26,8 +26,4 @@ public class NavigationHelper extends HelperBase {
     }
     click(By.linkText("strona główna"));
   }
-
-  public void closePopUp(){
-    wd.switchTo().alert().accept();
-  }
 }

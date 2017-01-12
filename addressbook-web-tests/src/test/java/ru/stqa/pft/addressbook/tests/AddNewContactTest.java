@@ -17,12 +17,12 @@ public class AddNewContactTest extends TestBase {
 
   @Test //(enabled = false)
   public void testAddNewContact() {
-    Contacts before = (Contacts) app.contact().all();
+    Contacts before = app.contact().all();
     NewContact contact = new NewContact()
             .withGroup("test1")
-            .withFirstName("Karol")
-            .withSecondName("K")
-            .withLastName("Karolokiewicz")
+            .withFirstName("Zennon")
+            .withSecondName("F")
+            .withLastName("Grabarczyk")
             .withNickName("err")
             .withTitle("Pan")
             .withCompany("clubclub")
@@ -32,10 +32,10 @@ public class AddNewContactTest extends TestBase {
 
     app.contact().createContact(contact,true);
     app.goTo().returnToHomepage();
-    Contacts after = (Contacts) app.contact().all();
+    Contacts after = app.contact().all();
     assertThat(after.size(), equalTo(before.size() + 1));
 
     assertThat(after, equalTo(
-            before.withAdded( contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }

@@ -49,16 +49,19 @@ public class ContactHelper extends HelperBase{
         if (isElementPresent(By.id("maintable"))){
             return;
         }
-        click(By.linkText("home"));
+        click(By.linkText("strona główna"));
     }
 
   public void deleteSelectedContact() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
-
+    public void closePopUp(){
+        wd.switchTo().alert().accept();
+    }
     public void delete(NewContact newContact) {
         selectContactById(newContact.getId());
         deleteSelectedContact();
+        closePopUp();
         returnToHome();
     }
 
@@ -98,36 +101,14 @@ public class ContactHelper extends HelperBase{
     return isElementPresent(By.name("selected[]"));
   }
 
-  public List<NewContact> all() {
+  public Contacts all() {
       Contacts contacts = new Contacts();
-    List<WebElement> trCollection = wd.findElements(By.tagName("tr"));
-     // List<WebElement> tdCollection = wd.findElements(By.tagName("td"));
-
+    List<WebElement> trCollection = wd.findElements(By.name("entry"));
       for (WebElement trElement : trCollection) {
-
-         List<WebElement> cells = trElement.findElements(By.tagName("td"));
-          String firstname = cells.get(3).getText();
-          String lastname = cells.get(2).getText();
-          int id = Integer.getInteger(cells.get(1).getAttribute("id"));
-
-          /*
-          List<WebElement> cellsFirstName = trElement.findElements(By.cssSelector("td:nth-child(3)"));
-          List<WebElement> cellsLastName = trElement.findElements(By.cssSelector("td:nth-child(2)"));
-          List<WebElement> cellsId = trElement.findElements(By.tagName("input"));
-          String firstname = "";
-          String lastname = "";
-          int id = 0;
-
-          for (WebElement element1 : cellsFirstName) {
-              firstname = element1.getText();
-          }
-          for (WebElement element2 : cellsLastName) {
-              lastname = element2.getText();
-          }
-          for (WebElement element3 : cellsId) {
-              id = Integer.parseInt(element3.findElement(By.tagName("input")).getAttribute("value"));
-          }
-          */
+         List<WebElement> cells = trElement.findElements(By.cssSelector("td"));
+          String firstname = cells.get(2).getText();
+          String lastname = cells.get(1).getText();
+          int id = Integer.parseInt(trElement.findElement(By.tagName("input")).getAttribute("id"));
 
           contacts.add(
                   new NewContact()
@@ -135,7 +116,6 @@ public class ContactHelper extends HelperBase{
                           .withFirstName(firstname)
                           .withLastName(lastname));
       }
-    //contacts.remove(0);
-    return (List<NewContact>) contacts;
+    return contacts;
   }
 }
