@@ -20,7 +20,7 @@ public class ContactModificationTest extends TestBase {
       app.contact().createContact(new ContactData()
               .withGroup("test1")
               .withFirstName("Kleofas")
-              .withSecondName("G")
+              .withMiddlename("G")
               .withLastName("Filipiak")
               .withNickName("trr")
               .withTitle("Pan")
@@ -37,7 +37,7 @@ public class ContactModificationTest extends TestBase {
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
             .withFirstName("TTT")
-            .withSecondName("KKK")
+            .withMiddlename("KKK")
             .withLastName("ZZZ")
             .withNickName("eew")
             .withTitle("Pani")

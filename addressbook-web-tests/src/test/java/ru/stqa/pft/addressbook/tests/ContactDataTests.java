@@ -21,7 +21,7 @@ public class ContactDataTests extends TestBase{
             app.contact().createContact(new ContactData()
                     .withGroup("test1")
                     .withFirstName("Maciek")
-                    .withSecondName("V")
+                    .withMiddlename("V")
                     .withLastName("Zbiec")
                     .withNickName("trr")
                     .withTitle("Pan")
@@ -76,7 +76,7 @@ public class ContactDataTests extends TestBase{
     }
 
     @Test
-    public  void testAddress(){
+    public void testAddress(){
         app.goTo().gotoToHomepage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -89,9 +89,44 @@ public class ContactDataTests extends TestBase{
                 .map(ContactDataTests::cleanedAddress)
                 .collect(Collectors.joining("\n"));
     }
-    public static String cleanedAddress(String addres){
-        return addres.replaceAll("\\s+","");
+    public static String cleanedAddress(String address){
+        return address.replaceAll("\\s+","");
     }
 
+
+    @Test
+    public void testDetails(){
+        app.goTo().gotoToHomepage();
+        ContactData contact = app.contact().all().iterator().next();
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        ContactData contactInfoFromDetails = app.contact().infoFromDetails(contact);
+
+        assertThat(contactInfoFromDetails.getAllDetails(),equalTo(mergeDetails(contactInfoFromEditForm)));
     }
+
+    private String mergeDetails(ContactData contact) {
+        return Arrays
+                .asList(contact.getFirstname(),
+                        contact.getMiddlename(),
+                        contact.getLastname(),
+                        contact.getNickname(),
+                        contact.getTitle(),
+                        contact.getCompany(),
+                        contact.getAddress(),
+                        contact.getHome(),
+                        contact.getMobile(),
+                        contact.getWork(),
+                        contact.getEmail(),
+                        contact.getEmail2(),
+                        contact.getEmail3(),
+                        contact.getAddress2())
+                .stream().filter((s) -> !s.equals(""))
+                .map(ContactDataTests::cleanedDetails)
+                .collect(Collectors.joining(""));
+    }
+    private static String cleanedDetails(String details) {
+        return details.replaceAll("\\s+","");
+    }
+
+}
 

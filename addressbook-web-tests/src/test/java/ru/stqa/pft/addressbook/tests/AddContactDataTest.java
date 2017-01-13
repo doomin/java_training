@@ -17,7 +17,7 @@ public class AddContactDataTest extends TestBase {
     ContactData contact = new ContactData()
             .withGroup("test1")
             .withFirstName("Zennon")
-            .withSecondName("F")
+            .withMiddlename("F")
             .withLastName("Grabarczyk")
             .withNickName("err")
             .withTitle("Pan")

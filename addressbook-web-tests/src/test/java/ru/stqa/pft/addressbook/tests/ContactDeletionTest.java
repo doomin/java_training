@@ -20,7 +20,7 @@ public class ContactDeletionTest extends TestBase{
       app.contact().createContact(new ContactData()
               .withGroup("test1")
               .withFirstName("Grzegorz")
-              .withSecondName("V")
+              .withMiddlename("V")
               .withLastName("Markowiak")
               .withNickName("trr")
               .withTitle("Pan")

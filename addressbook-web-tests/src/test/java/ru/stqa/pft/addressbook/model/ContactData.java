@@ -4,12 +4,14 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String group;
   private String firstname;
-  private String secondname;
+  private String middlename;
   private String lastname;
   private String nickname;
   private String title;
   private String company;
   private String address;
+  private String address2;
+  private String allAddress;
   private String home;
   private String mobile;
   private String work;
@@ -18,15 +20,13 @@ public class ContactData {
   private String email2;
   private String email3;
   private String allEmails;
+  private String allDetails;
 
   public String getGroup() {
         return group;
     }
   public String getFirstname() {
     return firstname;
-  }
-  public String getSecondname() {
-    return secondname;
   }
   public String getLastname() {
     return lastname;
@@ -43,8 +43,14 @@ public class ContactData {
   public String getAddress() {
     return address;
   }
+  public String getAddress2() {
+        return address2;
+    }
   public String getHome() {
         return home;
+    }
+  public String getAllAddress() {
+        return allAddress;
     }
   public String getMobile() {
     return mobile;
@@ -67,10 +73,20 @@ public class ContactData {
   public String getAllEmails() {
         return allEmails;
     }
+  public String getAllDetails() {
+        return allDetails;
+    }
   public int getId() {
         return id;
     }
+  public String getMiddlename() {
+        return middlename;
+    }
 
+  public ContactData withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
   public ContactData withId(int id){
         this.id = id;
         return this;
@@ -81,10 +97,6 @@ public class ContactData {
     }
   public ContactData withFirstName(String firstname){
         this.firstname = firstname;
-        return this;
-    }
-  public ContactData withSecondName(String secondname){
-        this.secondname = secondname;
         return this;
     }
   public ContactData withLastName(String lastname){
@@ -105,6 +117,14 @@ public class ContactData {
     }
   public ContactData withAddress(String address){
         this.address = address;
+        return this;
+    }
+  public ContactData withAddress2(String address2) {
+        this.address2 = address2;
+        return this;
+    }
+  public ContactData withAllAddress(String allAddress) {
+        this.allAddress = allAddress;
         return this;
     }
   public ContactData withHome(String home){
@@ -139,8 +159,13 @@ public class ContactData {
         this.allEmails = allEmails;
         return this;
     }
+  public ContactData withAllDetails(String allDetails) {
+        this.allDetails = allDetails;
+        return this;
+    }
 
-  @Override
+
+    @Override
   public String toString() {
     return "ContactData{" +
             "firstname='" + firstname + '\'' +
