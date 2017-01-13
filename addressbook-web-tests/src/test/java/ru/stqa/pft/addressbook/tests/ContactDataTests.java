@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by Dominik on 2017-01-12.
  */
-public class ContactDataTest extends TestBase{
+public class ContactDataTests extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -49,7 +49,7 @@ public class ContactDataTest extends TestBase{
      return Arrays
              .asList(contact.getHome(),contact.getMobile(),contact.getWork())
              .stream().filter((s) -> !s.equals(""))
-             .map(ContactDataTest::cleanedPhone)
+             .map(ContactDataTests::cleanedPhone)
              .collect(Collectors.joining("\n"));
     }
     public static String cleanedPhone(String phone){
@@ -68,7 +68,7 @@ public class ContactDataTest extends TestBase{
         return Arrays
                 .asList(contact.getEmail(),contact.getEmail2(),contact.getEmail3())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactDataTest::cleanedEmail)
+                .map(ContactDataTests::cleanedEmail)
                 .collect(Collectors.joining("\n"));
     }
     public static String cleanedEmail(String email){
@@ -86,7 +86,7 @@ public class ContactDataTest extends TestBase{
         return Arrays
                 .asList(contact.getAddress())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactDataTest::cleanedAddress)
+                .map(ContactDataTests::cleanedAddress)
                 .collect(Collectors.joining("\n"));
     }
     public static String cleanedAddress(String addres){
