@@ -36,15 +36,19 @@ public class ContactModificationTest extends TestBase {
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
-            .withFirstName("TTT")
-            .withSecondName("KKK")
-            .withLastName("ZZZ")
+            .withFirstName("cvb")
+            .withSecondName("vc")
+            .withLastName("wer")
             .withNickName("eew")
             .withTitle("Pani")
             .withCompany("aweerer")
             .withAddress("Lesna 80\n04-555 Warszawa")
+            .withHome("12312312")
             .withMobile("111111111")
-            .withEmail("poczta@poczta.com");
+            .withWork("4234 522 532")
+            .withEmail("ptrolo@poczta.com")
+            .withEmail2("werwe@wer.pl")
+            .withEmail3("wer@@wer.dk");
 
     app.contact().modifyContact(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
