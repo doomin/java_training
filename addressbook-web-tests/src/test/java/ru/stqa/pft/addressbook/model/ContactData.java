@@ -10,7 +10,6 @@ public class ContactData {
   private String title;
   private String company;
   private String address;
-  private String address2;
   private String home;
   private String mobile;
   private String work;
@@ -44,9 +43,6 @@ public class ContactData {
   public String getAddress() {
     return address;
   }
-  public String getAddress2() {
-        return address2;
-    }
   public String getHome() {
         return home;
     }
@@ -109,10 +105,6 @@ public class ContactData {
     }
   public ContactData withAddress(String address){
         this.address = address;
-        return this;
-    }
-  public ContactData withAddress2(String address2) {
-        this.address2 = address2;
         return this;
     }
   public ContactData withHome(String home){
