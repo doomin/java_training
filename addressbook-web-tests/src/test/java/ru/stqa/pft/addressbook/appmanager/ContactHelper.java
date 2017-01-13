@@ -32,7 +32,6 @@ public class ContactHelper extends HelperBase{
     type(By.name("title"),contact.getTitle());
     type(By.name("company"),contact.getCompany());
     type(By.name("address"),contact.getAddress());
-    type(By.name("address"),contact.getAddress2());
     type(By.name("home"),contact.getHome());
     type(By.name("mobile"),contact.getMobile());
     type(By.name("work"),contact.getWork());
@@ -191,18 +190,5 @@ public class ContactHelper extends HelperBase{
    // wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a",id))).click();
    // wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click();
    // wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']"))).click();
-    }
-
-    public void initContactDetailsById(int id) {
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
-        WebElement row = checkbox.findElement(By.xpath("./../.."));
-        List<WebElement> cells = row.findElements(By.tagName("td"));
-        cells.get(6).findElement(By.tagName("a")).click();
-    }
-
-    public ContactData infoFromDetailsPage(ContactData contact){
-      initContactDetailsById(contact.getId());
-      String infoFromDetailsPage = wd.findElement(By.xpath("//div[@id='container']")).getText();
-        return new ContactData().withAllDetails(infoFromDetailsPage);
     }
 }
