@@ -98,12 +98,12 @@ public class ContactDataTest extends TestBase {
         return addres.replaceAll("\\s+", "");
     }
 
-    @Test (enabled = false)
+    @Test
     public void testDetails() {
         app.goTo().gotoToHomepage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromDetailsPage = app.contact().infoFromDetailsPage(contact);
-       // assertThat(cleanedContactDetails(contact.getAllDetails()), equalTo(mergeContactDetails(contactInfoFromDetailsPage)));
+        assertThat(cleanedContactDetails(contact.getAllDetails()), equalTo(mergeContactDetails(contactInfoFromDetailsPage)));
 
     }
 }
