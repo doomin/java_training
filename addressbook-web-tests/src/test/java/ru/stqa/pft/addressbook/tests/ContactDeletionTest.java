@@ -32,6 +32,7 @@ public class ContactDeletionTest extends TestBase{
   }
   @Test //(enabled = false)
   public void testContactDeletion() {
+    app.goTo().gotoToHomepage();
     Contacts before = app.contact().all();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
