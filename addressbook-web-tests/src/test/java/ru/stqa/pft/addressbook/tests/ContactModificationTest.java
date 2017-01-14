@@ -33,9 +33,14 @@ public class ContactModificationTest extends TestBase {
 
   @Test //(enabled = false)
   public void testContactModification() {
+    app.goTo().gotoToHomepage();
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
+    app.contact().viewContactDetails(modifiedContact.getId());
+
     ContactData contact = new ContactData()
+            .withId(modifiedContact.getId())
+            .withGroup("test1")
             .withFirstName("TTT")
             .withMiddlename("KKK")
             .withLastName("ZZZ")

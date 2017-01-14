@@ -68,7 +68,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void modifyContact(ContactData contact){
-        viewContactDetails();
+        //viewContactDetails(contact.getId());
         modifyContactDetails();
         fillNewContactForm(contact, false);
         submitContactModification();
@@ -83,8 +83,12 @@ public class ContactHelper extends HelperBase{
         returnToHome();
     }
 
-  public void viewContactDetails() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
+  public void viewContactDetails(int id) {
+
+      WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
+      WebElement row = checkbox.findElement(By.xpath("./../.."));
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      cells.get(6).findElement(By.tagName("a")).click();
   }
 
   public void modifyContactDetails() {
@@ -156,6 +160,7 @@ public class ContactHelper extends HelperBase{
         }
 
     public ContactData infoFromEditForm(ContactData contact) {
+
       initContactModificationById(contact.getId());
       String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
       String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
