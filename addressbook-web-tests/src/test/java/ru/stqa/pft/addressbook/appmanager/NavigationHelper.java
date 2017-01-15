@@ -20,4 +20,11 @@ public class NavigationHelper extends HelperBase {
     }
     click(By.linkText("grupy"));
   }
+  public void gotoToHomepage() {
+    if (isElementPresent(By.id("maintable"))){
+      return;
+    } else if (isElementPresent(By.linkText("strona główna"))){
+    click(By.linkText("strona główna"));
+  }
+  }
 }
