@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
@@ -51,14 +52,15 @@ public class ContactHelper extends HelperBase{
         if (isElementPresent(By.id("maintable"))){
             return;
         }
-        click(By.linkText("strona główna"));
+        click(By.linkText("home page"));
     }
 
     public void returnToHome() {
-        if (isElementPresent(By.id("maintable"))){
+        if (isElementPresent(By.id("maintable"))) {
             return;
+        } else if (isElementPresent(By.linkText("strona główna"))) {
+            click(By.linkText("strona główna"));
         }
-        click(By.linkText("strona główna"));
     }
 
   public void deleteSelectedContact() {
@@ -217,12 +219,19 @@ public class ContactHelper extends HelperBase{
     public ContactData infoFromDetails(ContactData contact) {
         initContactDetailsById(contact.getId());
         String details = wd.findElement(By.cssSelector("#content")).getText()
-                .replaceAll("H:","")
-                .replaceAll("M:","")
-                .replaceAll("W:","")
-                .replaceAll("Członek grupy:","")
-                .replaceAll(wd.findElement(By.cssSelector(String.format("a[href^='./index.php?group']"))).getText(),"")
-                .replaceAll("\\s+","");
-        return new ContactData().withAllDetails(details);
+                    .replaceAll("H:", "")
+                    .replaceAll("M:", "")
+                    .replaceAll("W:", "")
+                    .replaceAll("\\s+", "")
+                    .replaceAll("Członekgrupy: ", "");
+
+        if (isElementPresent((By.cssSelector(String.format("a[href^='./index.php?group']"))))){
+            details = details
+                    .replaceAll(wd.findElement(By.cssSelector(String.format("a[href^='./index.php?group']"))).getText().replaceAll("\\s",""), "")
+                    .replaceAll("Członekgrupy:", "");
+
+        }
+            return new ContactData().withAllDetails(details);
+        }
     }
-}
+
