@@ -59,7 +59,7 @@ public class ContactHelper extends HelperBase{
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
-            click(By.linkText("strona główna"));
+        click(By.cssSelector(String.format("a[href='./']")));
         }
 
   public void deleteSelectedContact() {
@@ -226,11 +226,13 @@ public class ContactHelper extends HelperBase{
 
         if (isElementPresent((By.cssSelector(String.format("a[href^='./index.php?group']"))))){
             details = details
-                    .replaceAll(wd.findElement(By.cssSelector(String.format("a[href^='./index.php?group']"))).getText().replaceAll("\\s",""), "")
-                    .replaceAll("Członekgrupy:", "");
+                    .replaceAll(wd.findElement(By.cssSelector(String.format("a[href^='./index.php?group']"))).getText().replaceAll("\\s+",""), "")
+                    .replaceAll("Członekgrupy:", "")
+                    .replaceAll("Członekgrupy: ", "");
 
         }
-            return new ContactData().withAllDetails(details);
+        wd.navigate().back();
+        return new ContactData().withAllDetails(details);
         }
-    }
+           }
 

@@ -33,7 +33,7 @@ public class ContactModificationTest extends TestBase {
 
   @Test //(enabled = false)
   public void testContactModification() {
-    app.goTo().gotoToHomepage();
+   app.goTo().gotoToHomepage();
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     app.contact().viewContactDetails(modifiedContact.getId());

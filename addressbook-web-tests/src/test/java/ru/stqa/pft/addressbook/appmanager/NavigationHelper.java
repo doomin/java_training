@@ -24,6 +24,8 @@ public class NavigationHelper extends HelperBase {
     if (isElementPresent(By.id("maintable"))){
       return;
     }
-    click(By.linkText("strona główna"));
+    click(By.cssSelector(String.format("a[href='./']")));
   }
  }
+
+ //By.cssSelector(String.format("a[href='edit.php?id=%s']"))).click();

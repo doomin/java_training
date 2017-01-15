@@ -101,7 +101,6 @@ public class ContactDataTests extends TestBase{
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
         ContactData contactInfoFromDetails = app.contact().infoFromDetails(contact);
-
         assertThat(contactInfoFromDetails.getAllDetails(),equalTo(mergeDetails(contactInfoFromEditForm)));
     }
 
