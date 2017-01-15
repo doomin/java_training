@@ -101,7 +101,7 @@ public class ContactDataGenertor {
                     .withEmail3(generateRandomString() + "@" + generateRandomString())
                     .withAddress2(generateRandomString() + " " + generateRandomNumber() + " street\n" + generateRandomNumber() + "-" + generateRandomNumber() + "\n" + generateRandomString())
                     .withGroup("test 1")
-            );
+                         );
 
         }
         return contacts;
