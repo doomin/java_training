@@ -1,7 +1,10 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 import java.io.File;
 
+@XStreamAlias("contact")
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String group;
