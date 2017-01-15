@@ -58,10 +58,9 @@ public class ContactHelper extends HelperBase{
     public void returnToHome() {
         if (isElementPresent(By.id("maintable"))) {
             return;
-        } else if (isElementPresent(By.linkText("strona główna"))) {
+        }
             click(By.linkText("strona główna"));
         }
-    }
 
   public void deleteSelectedContact() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
