@@ -18,7 +18,8 @@ public class NavigationHelper extends HelperBase {
             && isElementPresent(By.name("new"))){
       return;
     }
-    click(By.linkText("grupy"));
+    //click(By.linkText("grupy"));
+    click(By.cssSelector(String.format("a[href='group.php']")));
   }
   public void gotoToHomepage() {
     if (isElementPresent(By.id("maintable"))){
