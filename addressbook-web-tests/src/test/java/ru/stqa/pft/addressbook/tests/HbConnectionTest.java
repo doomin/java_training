@@ -28,11 +28,6 @@ public class HbConnectionTest {
                 .build();
         try {
            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-         /*Configuration configuration = new Configuration().configure();
-            configuration.configure("hibernate.cfg.xml");
-            StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(ssrb.build());*/
-
         }
         catch (Exception e) {
             e.printStackTrace();
