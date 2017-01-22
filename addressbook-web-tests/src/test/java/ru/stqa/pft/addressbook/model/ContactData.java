@@ -3,59 +3,100 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
   private int id = Integer.MAX_VALUE;
     @Expose
+    @Transient
   private String group;
     @Expose
+    @Column(name = "firstname")
+  //  @Type(type = "text")
   private String firstname;
     @Expose
+    @Column(name = "middlename")
+   // @Type(type = "text")
   private String middlename;
     @Expose
+    @Column(name = "lastname")
+  //  @Type(type = "text")
   private String lastname;
     @Expose
+    @Column(name = "nickname")
+ //   @Type(type = "text")
   private String nickname;
     @Expose
+    @Column(name = "title")
+  //  @Type(type = "text")
   private String title;
     @Expose
+    @Column(name = "company")
+    //@Type(type = "text")
   private String company;
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
   private String address;
     @Expose
+    @Column(name = "address2")
+    @Type(type = "text")
   private String address2;
     @Expose
+    @Transient
   private String allAddress;
     @Expose
+    @Column(name = "home")
+    @Type(type = "text")
   private String home;
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
   private String mobile;
     @Expose
+    @Column(name = "work")
+    @Type(type = "text")
   private String work;
+    @Transient
   private String allPhones;
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
   private String email;
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
   private String email2;
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
   private String email3;
+    @Transient
   private String allEmails;
+    @Transient
   private String allDetails;
 
     public File getPhoto() {
-        return photo;
+        return new File (photo);
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
-    private File photo;
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
   public String getGroup() {
         return group;
@@ -222,8 +263,9 @@ public class ContactData {
     @Override
   public String toString() {
     return "ContactData{" +
-            "firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
+            "id = '" + id + '\'' +
+            "firstname ='" + firstname + '\'' +
+            ", lastname ='" + lastname + '\'' +
             '}';
   }
 
