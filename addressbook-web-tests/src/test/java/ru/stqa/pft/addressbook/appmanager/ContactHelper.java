@@ -40,7 +40,7 @@ public class ContactHelper extends HelperBase{
     type(By.name("email"),contact.getEmail());
     type(By.name("email2"),contact.getEmail());
     type(By.name("email3"),contact.getEmail());
-    attach(By.name("photo"),contact.getPhoto());
+//    attach(By.name("photo"),contact.getPhoto());
 
     if (creation){
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
@@ -108,7 +108,8 @@ public class ContactHelper extends HelperBase{
             && isElementPresent(By.name("new_group"))){
       return;
     }
-    click(By.linkText("nowy wpis"));
+    //click(By.linkText("nowy wpis"));
+    click(By.cssSelector("a[href = 'edit.php']"));
   }
 
   public void createContact(ContactData contact, boolean b) {

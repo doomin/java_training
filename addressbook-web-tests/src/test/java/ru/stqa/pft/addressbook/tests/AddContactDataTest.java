@@ -58,8 +58,8 @@ public class AddContactDataTest extends TestBase {
   @Test (dataProvider = "validContactsFromJson")
   public void testAddNewContact(ContactData contact) {
     app.goTo().gotoToHomepage();
-    Contacts before = app.contact().all();
-      File photo = new File("src/test/resources/photo1.jpg");
+    Contacts before = app.db().contacts();  //app.contact().all();
+    //  File photo = new File("src/test/resources/photo1.jpg");
       /*
       ContactData contact = new ContactData()
             .withGroup("test1")
@@ -76,7 +76,7 @@ public class AddContactDataTest extends TestBase {
 */
     app.contact().createContact(contact,true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
