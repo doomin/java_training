@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class ContactHelper extends HelperBase{
 //    attach(By.name("photo"),contact.getPhoto());
 
     if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
+      //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -75,7 +75,7 @@ public class ContactHelper extends HelperBase{
         fillNewContactForm(contact, false);
         submitContactModification();
         contactCache = null;
-        returnToHomepage();
+        returnToHome();
     }
     public void delete(ContactData contact) {
         selectContactById(contact.getId());
@@ -117,7 +117,7 @@ public class ContactHelper extends HelperBase{
     fillNewContactForm(contact,b);
     submitNewContact();
     contactCache = null;
-    returnToHomepage();
+    returnToHome();
   }
 
   public void selectContactById(int id) {
@@ -157,6 +157,12 @@ public class ContactHelper extends HelperBase{
     return new Contacts(contactCache);
   }
 
+  public void addToGroup(ContactData contact, GroupData group){
+     wd.findElement(By.cssSelector(String.format("input[value='%s']",contact.getId()))).click();
+     new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+     click(By.xpath("//div[@id='content']/form[2]/div[4]/input"));
+     returnToHome();
+  }
 
     public int count() {
       return wd.findElements(By.name("entry")).size();

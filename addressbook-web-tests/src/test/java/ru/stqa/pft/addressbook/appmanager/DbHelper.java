@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -44,6 +45,15 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
+    }
 
+    public ContactData selectMaxContactId(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery( "from ContactData where id = (select max(id) from ContactData)").list();
+        ContactData addedContact = result.iterator().next();
+        session.getTransaction().commit();
+        session.close();
+        return addedContact;
     }
 }

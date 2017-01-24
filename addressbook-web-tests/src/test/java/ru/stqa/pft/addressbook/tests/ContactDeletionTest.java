@@ -19,7 +19,7 @@ public class ContactDeletionTest extends TestBase{
     if (app.db().contacts().size() == 0){
       app.goTo().gotoToHomepage();
       app.contact().createContact(new ContactData()
-              .withGroup("test1")
+              //.withGroup("test1")
               .withFirstName("Grzegorz")
               .withMiddlename("V")
               .withLastName("Markowiak")

@@ -19,7 +19,7 @@ public class ContactModificationTest extends TestBase {
     if (app.db().contacts().size() == 0){
         app.goTo().gotoToHomepage();
         app.contact().createContact(new ContactData()
-              .withGroup("test1")
+              //.withGroup("test1")
               .withFirstName("Kleofas")
               .withMiddlename("G")
               .withLastName("Filipiak")
@@ -41,7 +41,7 @@ public class ContactModificationTest extends TestBase {
 
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId())
-            .withGroup("test1")
+            //.withGroup("test1")
             .withFirstName("TTT")
             .withMiddlename("KKK")
             .withLastName("ZZZ")

@@ -77,7 +77,8 @@ public class ContactDataGenertor {
                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(),
                        contact.getNickname(), contact.getTitle(), contact.getCompany(), contact.getAddress(), contact.getHome(),
                        contact.getMobile(), contact.getWork(), contact.getEmail(), contact.getEmail2(), contact.getEmail3(),
-                       contact.getAddress2(), contact.getGroup()));
+                       contact.getAddress2()));
+                       //, contact.getGroup()));
            }
        }
     }
@@ -100,7 +101,7 @@ public class ContactDataGenertor {
                     .withEmail2(generateRandomString() + "@" + generateRandomString())
                     .withEmail3(generateRandomString() + "@" + generateRandomString())
                     .withAddress2(generateRandomString() + " " + generateRandomNumber() + " street\n" + generateRandomNumber() + "-" + generateRandomNumber() + "\n" + generateRandomString())
-                    .withGroup("test 1")
+                    //.withGroup("test 1")
                          );
 
         }
