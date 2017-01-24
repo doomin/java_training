@@ -223,13 +223,16 @@ public class ContactHelper extends HelperBase{
                     .replaceAll("M:", "")
                     .replaceAll("W:", "")
                     .replaceAll("\\s+", "")
-                    .replaceAll("Członekgrupy: ", "");
+                    .replaceAll("Członekgrupy: ", "")
+                    .replaceAll("Memberof: ", "");
 
         if (isElementPresent((By.cssSelector(String.format("a[href^='./index.php?group']"))))){
             details = details
                     .replaceAll(wd.findElement(By.cssSelector(String.format("a[href^='./index.php?group']"))).getText().replaceAll("\\s+",""), "")
                     .replaceAll("Członekgrupy:", "")
-                    .replaceAll("Członekgrupy: ", "");
+                    .replaceAll("Członekgrupy: ", "")
+                    .replaceAll("Memberof: ", "")
+                    .replaceAll("Memberof:", "");
 
         }
         wd.navigate().back();
