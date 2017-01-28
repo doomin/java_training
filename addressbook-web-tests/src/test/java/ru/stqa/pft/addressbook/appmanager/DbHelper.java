@@ -20,40 +20,46 @@ public class DbHelper {
 
     private final SessionFactory sessionFactory;
 
-    public DbHelper(){
+    public DbHelper() {
 
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
-            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-       }
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    }
 
-       public Groups groups(){
-           Session session = sessionFactory.openSession();
-           session.beginTransaction();
-           List<GroupData> result = session.createQuery( "from GroupData" ).list();
-           session.getTransaction().commit();
-           session.close();
-           return new Groups(result);
-
-       }
-
-    public Contacts contacts(){
+    public Groups groups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'").list();
+        List<GroupData> result = session.createQuery("from GroupData").list();
+        session.getTransaction().commit();
+        session.close();
+        return new Groups(result);
+
+    }
+
+    public Contacts contacts() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
     }
 
-    public ContactData selectMaxContactId(){
+    public ContactData selectMaxContactId() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where id = (select max(id) from ContactData)").list();
+        List<ContactData> result = session.createQuery("from ContactData where id = (select max(id) from ContactData)").list();
         ContactData addedContact = result.iterator().next();
         session.getTransaction().commit();
         session.close();
         return addedContact;
+    }
+
+    public void refreshContactData(ContactData contact) {
+        Session session = sessionFactory.openSession();
+        session.refresh(contact);
+        session.close();
     }
 }
