@@ -43,11 +43,16 @@ public class ContactHelper extends HelperBase{
 //    attach(By.name("photo"),contact.getPhoto());
 
     if (creation){
-      //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
+        if (contact.getGroups().size() > 0){
+            Assert.assertTrue(contact.getGroups().size() == 1);
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+        }
+
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
+
     public void returnToHomepage() {
         if (isElementPresent(By.id("maintable"))){
             return;
