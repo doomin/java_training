@@ -15,13 +15,14 @@ public class RegistrationHelper extends HelperBase{
         wd.get(app.getProperty("web.baseUrl") + "/signup_page.php");
         type(By.name("username"), username);
         type(By.name("email"),email);
-        click(By.xpath("//div[@id=\"signup-form\"]/fieldset/input[2]"));
+        click(By.cssSelector("input[value='Signup']"));
     }
 
     public void finish(String confirmationLink, String password) {
         wd.get(confirmationLink);
         type(By.name("password"), password);
         type(By.name("password_confirm"), password);
-        click(By.cssSelector("input[value='Update user']"));
+      //  click(By.cssSelector("input[value='Update User']"));
+        click(By.xpath("//*[@id='account-update-form']/fieldset/span/button/span"));
     }
 }
