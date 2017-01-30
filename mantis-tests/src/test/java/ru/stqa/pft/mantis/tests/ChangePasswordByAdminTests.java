@@ -28,39 +28,42 @@ public class ChangePasswordByAdminTests extends TestBase{
         public void testChangePasswordByAdmin() throws IOException, MessagingException {
 
             String user = "";
+            String newpassword = "newpassword";
             String email = "";
+
             Connection conn = null;
+
             try {
+
                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password=");
                 Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery("select username, email from mantis_user_table order by rand() limit 1");
 
-                while (rs.next()){
-                    user = rs.getString(1);
-                    email = rs.getString(2);
+
+                    ResultSet rs = st.executeQuery("select username, email from mantis_user_table where username <> 'administrator' order by rand() limit 1");
+
+                    while (rs.next()) {
+                        user = rs.getString(1);
+                        email = rs.getString(2);
+                    }
+                    rs.close();
+                    st.close();
+                    conn.close();
+
+
+                } catch(SQLException ex){
+                    // handle any errors
+                    System.out.println("SQLException: " + ex.getMessage());
+                    System.out.println("SQLState: " + ex.getSQLState());
+                    System.out.println("VendorError: " + ex.getErrorCode());
                 }
-                rs.close();
-                st.close();
-                conn.close();
-
-            } catch (SQLException ex) {
-                // handle any errors
-                System.out.println("SQLException: " + ex.getMessage());
-                System.out.println("SQLState: " + ex.getSQLState());
-                System.out.println("VendorError: " + ex.getErrorCode());
-            }
-
-            String oldPassword = "";
-            String newPassword = "";
 
             app.passwordChange().changePasswordByAdmin(user);
 
-            List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+            List<MailMessage> mailMessages = app.mail().waitForMail(1, 30000);
             String passwordChangeLink = findConfirmationLink(mailMessages, email);
 
-            app.passwordChange().finish(passwordChangeLink, oldPassword, newPassword);
-
-            assertTrue(app.newSession().login(user, newPassword));
+            app.passwordChange().finish(passwordChangeLink, newpassword);
+            assertTrue(app.newSession().login(user, newpassword));
 
         }
 

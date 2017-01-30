@@ -23,14 +23,13 @@ public class PasswordChangeHelper extends HelperBase{
 
         type(By.name("username"), user);
         click(By.cssSelector("input[value='Manage User']"));
-        click(By.cssSelector("input[value='New Password']"));
+        click(By.cssSelector("input[value='Reset Password']"));
     }
 
-    public void finish(String passwordChangeLink, String oldPassword, String newPassword) {
+    public void finish(String passwordChangeLink, String Password) {
         wd.get(passwordChangeLink);
-        type(By.name("old_password"), oldPassword);
-        type(By.name("password"), newPassword);
-        type(By.name("password_confirm"), newPassword);
+        type(By.name("password"), Password);
+        type(By.name("password_confirm"), Password);
         click(By.xpath("//*[@id='account-update-form']/fieldset/span/button/span"));
     }
 }
