@@ -3,6 +3,7 @@ package ru.stqa.pft.mantis.appmanager;
 import org.openqa.selenium.By;
 
 import java.io.IOException;
+import java.sql.*;
 
 /**
  * Created by root on 1/30/17.
@@ -13,14 +14,14 @@ public class PasswordChangeHelper extends HelperBase{
         super(app);
     }
 
-    public void changePasswordByAdmin(String username) throws IOException {
-        //wd.get(app.getProperty("web.baseUrl" + "/login_page.php"));
+    public void changePasswordByAdmin(String user) throws IOException {
         type(By.name("username"), "administrator");
         type(By.name("password"), "root");
-      //  app.newSession().login("administrator", "root");
+        click(By.cssSelector("input[value='Login']"));
         click(By.cssSelector(String.format("a[href='manage_user_create_page.php']")));
-        click(By.cssSelector(String.format("a[href='/mantisbt-2.0.0/manage_user_create_page.php']")));
-        type(By.name("username"), username);
+        click(By.linkText("Manage Users"));
+
+        type(By.name("username"), user);
         click(By.cssSelector("input[value='Manage User']"));
         click(By.cssSelector("input[value='New Password']"));
     }

@@ -8,6 +8,7 @@ import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -25,20 +26,41 @@ public class ChangePasswordByAdminTests extends TestBase{
 
         @Test
         public void testChangePasswordByAdmin() throws IOException, MessagingException {
-            //select username and email from DB
-            String username = "";
+
+            String user = "";
             String email = "";
+            Connection conn = null;
+            try {
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password=");
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery("select username, email from mantis_user_table order by rand() limit 1");
+
+                while (rs.next()){
+                    user = rs.getString(1);
+                    email = rs.getString(2);
+                }
+                rs.close();
+                st.close();
+                conn.close();
+
+            } catch (SQLException ex) {
+                // handle any errors
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+
             String oldPassword = "";
             String newPassword = "";
 
-            app.passwordChange().changePasswordByAdmin(username);
+            app.passwordChange().changePasswordByAdmin(user);
 
             List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
             String passwordChangeLink = findConfirmationLink(mailMessages, email);
 
             app.passwordChange().finish(passwordChangeLink, oldPassword, newPassword);
 
-            assertTrue(app.newSession().login(username, newPassword));
+            assertTrue(app.newSession().login(user, newPassword));
 
         }
 
