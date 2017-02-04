@@ -17,8 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 
 /**
  * Created by doomin on 12.12.16.
