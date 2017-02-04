@@ -1,7 +1,5 @@
 package ru.stqa.pft.mantis.tests;
 
-import biz.futureware.mantis.rpc.soap.client.ProjectData;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.mantis.model.Issue;
 import ru.stqa.pft.mantis.model.Project;
@@ -11,7 +9,7 @@ import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by root on 2/4/17.
@@ -30,10 +28,13 @@ public class SoapTests extends TestBase{
 
     @Test
     public void testCreateIssue() throws RemoteException, ServiceException, MalformedURLException {
+
+        skipIfNotFixed(0000002);
+
         Set<Project> projects = app.soap().getProjects();
         Issue issue = new Issue()
-                .withSummary("Test issue")
-                .withDescription("Test issue description")
+                .withSummary("Test issue3")
+                .withDescription("Test issue description4")
                 .withProject(projects.iterator().next());
 
        Issue created = app.soap().addIssue(issue);
