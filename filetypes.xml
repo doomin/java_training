@@ -1,6 +1,7 @@
 <application>
   <component name="FileTypeManager" version="17">
     <extensionMap>
+      <mapping pattern="script4" type="Groovy" />
       <mapping pattern="script2" type="Groovy" />
       <mapping pattern="script3" type="Groovy" />
       <mapping pattern="script" type="Groovy" />
