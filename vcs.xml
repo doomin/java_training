@@ -10,8 +10,12 @@
           <option name="url" value="https://github.com/doomin/java_training.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/doomin/bookstore.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="C:\Users\Dominik\IdeaProjects\java_training" />
+    <option name="cloneParentDir" value="C:\Users\Dominik\IdeaProjects\Bookstore" />
   </component>
 </application>
